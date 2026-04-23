@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Management QA Testing Daki</title>
+  <link rel="stylesheet" href="/styles/main.css"/>
+  <link rel="stylesheet" href="/styles/home.css"/>
+  <link rel="stylesheet" href="/styles/animations.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="app-header">
+  <div class="header-inner">
+    <div class="header-brand" style="cursor:pointer" onclick="goHome()">
+      <span class="header-icon"><img src="/images/daki.svg" alt="daki" class="header-logo"/></span>
+      <div>
+        <h1 id="header-title">Data Management QA Testing Daki</h1>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button id="theme-toggle" class="theme-btn" onclick="toggleTheme()" title="Alternar tema (Ctrl+L)">
+        <svg class="sun-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3M3.5 3.5l2 2M10.5 10.5l2 2M3.5 12.5l2-2M10.5 5.5l2-2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <svg class="moon-icon" viewBox="0 0 16 16" fill="none"><path d="M12 9.5a5 5 0 11-4.5-8A4 4 0 0012 9.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="export-bar"></div>
+    </div>
+  </div>
+</header>
+
+<div id="toast" class="toast" aria-live="polite"></div>
+
+<!-- ═══════ HOME SCREEN ═══════ -->
+<div id="view-home" class="home-view">
+  <div class="home-container">
+    <div class="home-hero">
+      <div class="home-hero-text">
+        <h1 class="home-title">Management<br/><span class="home-title-accent">QA Testing</span> <span class="home-title-daki">Daki</span></h1>
+        <p class="home-subtitle">Daki que sai os testes</p>
+      </div>
+      <div class="home-hero-video">
+        <div class="video-frame">
+          <video autoplay loop muted playsinline class="hero-video">
+            <source src="/images/hero-video.mp4" type="video/mp4"/>
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-grid">
+      <button class="home-card home-card--hubr" onclick="goModule('hubr')">
+        <div class="home-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+        <div class="home-card-body"><div class="home-card-name">HUBR</div></div>
+        <div class="home-card-arrow">&rarr;</div>
+      </button>
+      <button class="home-card home-card--rops" onclick="goModule('rops')">
+        <div class="home-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="home-card-body"><div class="home-card-name">RAIO</div></div>
+        <div class="home-card-arrow">&rarr;</div>
+      </button>
+      <button class="home-card home-card--trade" onclick="goModule('trade')">
+        <div class="home-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg></div>
+        <div class="home-card-body"><div class="home-card-name">TRADE</div></div>
+        <div class="home-card-arrow">&rarr;</div>
+      </button>
+      <button class="home-card home-card--wms" onclick="goModule('wms')">
+        <div class="home-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+        <div class="home-card-body"><div class="home-card-name">WMS</div></div>
+        <div class="home-card-arrow">&rarr;</div>
+      </button>
+      <button class="home-card home-card--tests" onclick="goModule('tests')">
+        <div class="home-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+        <div class="home-card-body"><div class="home-card-name">Executar Teste</div></div>
+        <div class="home-card-arrow">&rarr;</div>
+      </button>
+      <button class="home-card home-card--estoque" onclick="goModule('estoque')">
+        <div class="home-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12l-8 4-8-4M12 4l8 4-8 4-8-4 8-4zm0 16l8-4-8 4-8-4 8 4z"/></svg></div>
+        <div class="home-card-body"><div class="home-card-name">Gestão de Estoque</div></div>
+        <div class="home-card-arrow">&rarr;</div>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ UNDER CONSTRUCTION ═══════ -->
+<div id="view-construction" class="construction-view" style="display:none">
+  <div class="construction-container">
+    <div class="construction-hardhat">🚧</div>
+    <h2 class="construction-title" id="construction-module-name">Módulo</h2>
+    <p class="construction-phrase" id="construction-phrase"></p>
+    <div class="construction-progress">
+      <div class="construction-bar"><div class="construction-fill"></div></div>
+      <span class="construction-pct">42%</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ TRADE VIEW ═══════ -->
+<div id="view-trade" style="display:none">
+  <div class="top-tabs" id="top-tabs-bar">
+    <button class="top-tab" onclick="setTopTab('config')">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M6.86 2.572a1.2 1.2 0 012.28 0l.35.732a1.2 1.2 0 001.275.658l.808-.1a1.2 1.2 0 011.14 1.97l-.457.672a1.2 1.2 0 000 1.392l.457.672a1.2 1.2 0 01-1.14 1.97l-.808-.1a1.2 1.2 0 00-1.275.658l-.35.732a1.2 1.2 0 01-2.28 0l-.35-.732a1.2 1.2 0 00-1.275-.658l-.808.1a1.2 1.2 0 01-1.14-1.97l.457-.672a1.2 1.2 0 000-1.392l-.457-.672a1.2 1.2 0 011.14-1.97l.808.1a1.2 1.2 0 001.275-.658l.35-.732z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
+      Config
+    </button>
+
+    <button class="top-tab" onclick="setTopTab('invoice')">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2"/><path d="M6 5h4M6 7.5h4M6 10h2" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+      Invoice <span class="sub-tab-badge" id="invoice-top-badge" style="display:none">0</span>
+    </button>
+    <button class="top-tab active" onclick="setTopTab('po')">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Purchase Order
+    </button>
+    <button class="top-tab" onclick="setTopTab('to')">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Transfer Order
+    </button>
+  </div>
+  <div class="wrap">
+    <div id="view-po">
+      <div id="subtab-order" class="sub-content">
+        <div id="po-step1" class="po-step">
+          <div class="step-header"><div class="step-num">1</div><div><div class="step-title">Selecionar HUB</div><div class="step-sub">Centro de distribuição para esta Purchase Order</div></div></div>
+          <div class="hub-search-row"><div class="search-wrap" style="max-width:380px"><svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input id="hub-search" class="search-input" placeholder="Buscar HUB por nome ou cidade…" oninput="renderHubList()"/></div></div>
+          <div class="hub-grid" id="hub-grid"><div class="po-loading"><span class="spinner"></span> Carregando HUBs…</div></div>
+        </div>
+        <div id="po-step2" class="po-step" style="display:none">
+          <div class="breadcrumb"><button class="bc-btn" onclick="poBack1()">← HUBs</button><span class="bc-sep">/</span><span id="bc-hub" class="bc-current"></span></div>
+          <div class="step-header"><div class="step-num">2</div><div><div class="step-title">Selecionar Vendor Product</div><div class="step-sub">Vendors ativos vinculados a este HUB</div></div></div>
+          <div class="vendor-grid" id="vendor-grid"></div>
+        </div>
+        <div id="po-step3" class="po-step" style="display:none">
+          <div class="breadcrumb">
+            <button class="bc-btn" onclick="poBack1()">← HUBs</button><span class="bc-sep">/</span>
+            <button class="bc-btn" onclick="poBack2()" id="bc-hub-btn"></button><span class="bc-sep">/</span>
+            <span id="bc-vendor" class="bc-current"></span>
+            <div class="bc-actions">
+              <button class="btn-ghost" id="btn-refresh" onclick="syncVendorProducts()">↻ Atualizar produtos</button>
+              <button class="btn-success" id="btn-save-po" onclick="savePOandInvoice()">⬆ Criar PO + NF</button>
+              <button class="btn-success" id="btn-save-po-only" onclick="savePOOnly()" style="margin-left:8px">⬆ Criar PO (sem NF)</button>
+            </div>
+          </div>
+          <div class="ctx-bar">
+            <div class="ctx-pill"><span class="ctx-lbl">HUB</span><span class="ctx-val" id="ctx-hub">—</span></div><span class="ctx-sep">→</span>
+            <div class="ctx-pill"><span class="ctx-lbl">Vendor</span><span class="ctx-val" id="ctx-vendor">—</span></div><span class="ctx-sep">·</span>
+            <div class="ctx-pill"><span class="ctx-lbl">CNPJ</span><span class="ctx-val mono" id="ctx-cnpj">—</span></div><span class="ctx-sep">·</span>
+            <div class="ctx-pill"><span class="ctx-lbl">Produtos SF</span><span class="ctx-val accent" id="ctx-prod-count">…</span></div>
+          </div>
+          <div class="api-status-wrap" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span id="api-status" class="api-status idle">Aguardando</span>
+            <span id="api-last-po" class="api-last-po" style="margin-left:12px;font-size:12px;color:var(--green)"></span>
+            <span id="sf-id-warn" style="display:none;font-size:11px;color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber);padding:3px 10px;border-radius:6px">⚠ Vendor sem SF Account ID</span>
+          </div>
+
+          <div id="inner-products" class="inner-content">
+            <div class="po-toolbar">
+              <div class="search-wrap" style="flex:1;min-width:180px"><svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input id="prod-search" class="search-input" placeholder="Buscar produto ou SKU" oninput="poFilter()"/></div>
+              <div class="uom-group" id="uom-group"><span style="font-size:11px;color:var(--text3);white-space:nowrap">UOM:</span>
+                <label class="uom-chip active"><input type="checkbox" value="ea" checked onchange="onUomChange()"> ea</label>
+                <label class="uom-chip active"><input type="checkbox" value="Pallet" checked onchange="onUomChange()"> Pallet</label>
+                <label class="uom-chip active"><input type="checkbox" value="Primary Case" checked onchange="onUomChange()"> Primary Case</label>
+                <label class="uom-chip active"><input type="checkbox" value="Secondary Case" checked onchange="onUomChange()"> Secondary Case</label>
+                <label class="uom-chip active"><input type="checkbox" value="Weight" checked onchange="onUomChange()"> Weight</label>
+              </div>
+              <button class="btn-ghost" onclick="poDeselectAll()">Limpar sel.</button>
+              <button class="btn-import" id="btn-import" onclick="poImport()" disabled>↗ Importar para Invoice <span class="import-badge" id="import-badge">0</span></button>
+            </div>
+            <div class="po-table-wrap"><table class="po-table"><thead id="po-thead"></thead><tbody id="po-body"><tr><td colspan="11" class="po-loading"><span class="spinner"></span> Selecione um vendor…</td></tr></tbody></table></div>
+            <div class="po-footer"><div class="po-footer-l"><span id="po-count-lbl">0 produtos</span><span class="sep">·</span><span id="po-sel-lbl" class="muted">Nenhum selecionado</span></div><div class="po-footer-r"><span class="muted">Total selecionado</span><span class="po-total-val" id="po-total">R$ 0,00</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ INVOICE VIEW ═══ -->
+    <div id="view-invoice" style="display:none">
+      <div class="sub-tabs-bar" id="invoice-tabs-bar" style="display:flex;align-items:center">
+        <button class="sub-tab active" onclick="setInvoiceTab('inv-li')">Invoice LI <span class="sub-tab-badge" id="nf-badge" style="display:none">0</span></button>
+        <button class="sub-tab" onclick="setInvoiceTab('inv-dest')">Destinatário</button>
+        <button class="sub-tab" onclick="setInvoiceTab('inv-emit')">Emitente / NF</button>
+        <button class="sub-tab" onclick="setInvoiceTab('inv-trib')">Tributos</button>
+        <div style="margin-left:auto">
+          <button class="btn-success" id="btn-generate-invoice" onclick="generateAndExport()" disabled>⟳ Gerar Invoice</button>
+        </div>
+      </div>
+
+      <div id="subtab-inv-li" class="sub-content">
+        <div class="panel">
+          <div class="items-header">
+            <h3 style="margin:0;border:none;padding:0">Invoice Line Items</h3>
+            <div class="items-summary">
+              <span class="summary-pill"><span class="pill-lbl">Itens</span><span class="pill-val" id="summCount">0</span></span>
+              <span class="summary-pill"><span class="pill-lbl">Total geral</span><span class="pill-val green" id="summTotal">R$ 0,00</span></span>
+              <button class="btn-accent" onclick="setTopTab('po')">+ Buscar na PO</button>
+              <button class="btn-ghost" onclick="confirmClearItems()">🗑 Limpar itens</button>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button class="exp-btn xml" onclick="exportXML()">⬇ XML</button>
+                <button class="exp-btn img" onclick="exportIMG()">⬇ JPEG</button>
+                <button class="exp-btn print" onclick="printDANFE()">🖨 PDF</button>
+              </div>
+            </div>
+          </div>
+          <div class="po-table-wrap"><table class="po-table"><thead><tr><th style="width:36px">#</th><th style="min-width:180px">Produto</th><th>Cód</th><th>CFOP</th><th>UN</th><th>SKU</th><th>cProd</th><th class="th-r">Custo R$</th><th class="th-r">QTD/UN</th><th class="th-qty">Quantidade</th><th class="th-r">Total R$</th><th style="width:36px"></th></tr></thead><tbody id="itemsArea"></tbody></table></div>
+          <button class="add-item-btn" onclick="addItem()">+ Adicionar item manualmente</button>
+        </div>
+      </div>
+
+      <div id="subtab-inv-emit" class="sub-content" style="display:none">
+        <div class="panel">
+          <h3>Emitente (Vendor)</h3>
+          <div class="row2"><div class="field"><label>Razão Social (xNome)</label><input id="emRazao" value="PEPSICO DO BRASIL LTDA BR"/></div><div class="field"><label>CNPJ</label><input id="emCnpj" value="31565104031307"/></div></div>
+          <div class="row2"><div class="field"><label>Endereço (xLgr)</label><input id="emEnd" value="R HENRY FORD COMP.ANEXO MOD. 9 10 11 12"/></div><div class="field"><label>Número (nro)</label><input id="emNro" value="803"/></div></div>
+          <div class="row3"><div class="field"><label>Bairro</label><input id="emBairro" value="PRESIDENTE ALTINO"/></div><div class="field"><label>cMun</label><input id="emCMun" value="3534401"/></div><div class="field"><label>xMun</label><input id="emMun" value="OSASCO"/></div></div>
+          <div class="row3"><div class="field"><label>UF</label><input id="emUf" value="SP"/></div><div class="field"><label>CEP</label><input id="emCep" value="06210108"/></div><div class="field"><label>Fone</label><input id="emFone" value="2121189500"/></div></div>
+          <div class="row2"><div class="field"><label>IE</label><input id="emIe" value="121874951118"/></div><div class="field"><label>CRT</label><input id="emCrt" value="3"/></div></div>
+          <h3>Dados da NF</h3>
+          <div class="row4"><div class="field"><label>Nº NF (nNF)</label><input id="nfNum" value="307821270"/></div><div class="field"><label>Série</label><input id="nfSerie" value="1"/></div><div class="field"><label>Tipo (tpNF)</label><select id="nfTipo"><option value="1">1 — Saída</option><option value="0">0 — Entrada</option></select></div><div class="field"><label>cNF</label><input id="nfCNF" value="74993219"/></div></div>
+          <div class="row3"><div class="field"><label>Data Emissão</label><input id="nfDataEmis" type="date"/></div><div class="field"><label>Data Saída</label><input id="nfDataSaida" type="date"/></div><div class="field"><label>Hora</label><input id="nfHora" value="12:53:57.517"/></div></div>
+          <div class="row4"><div class="field"><label>cUF</label><input id="nfCUF" value="35"/></div><div class="field"><label>idDest</label><input id="nfIdDest" value="1"/></div><div class="field"><label>cMunFG</label><input id="nfCMunFG" value="3534401"/></div><div class="field"><label>tpAmb</label><select id="nfTpAmb"><option value="1">1 — Produção</option><option value="2">2 — Homologação</option></select></div></div>
+          <div class="row3"><div class="field"><label>indFinal</label><input id="nfIndFinal" value="0"/></div><div class="field"><label>indIntermed</label><input id="nfIndIntermed" value="0"/></div><div class="field"><label>verProc</label><input id="nfVerProc" value="GRCNFE1.0"/></div></div>
+          <div class="field"><label>Natureza da Operação</label><input id="nfNat" value="Venda"/></div>
+          <div class="field"><label>Chave de Acesso (44 dígitos)</label><input id="nfChave" value=""/></div>
+          <div class="field"><label>Protocolo (nProt)</label><input id="nfProtocolo" value="135241309251580"/></div>
+        </div>
+      </div>
+
+      <div id="subtab-inv-dest" class="sub-content" style="display:none">
+        <div class="panel">
+          <h3>Destinatário / Remetente (HUB)</h3>
+          <div class="row2"><div class="field"><label>xNome</label><input id="destNome" value="Daki CD Barueri LTDA."/></div><div class="field"><label>CNPJ</label><input id="destCnpj" value="45027395003846"/></div></div>
+          <div class="row2"><div class="field"><label>xLgr</label><input id="destEnd" value="Rua Professor João Brito"/></div><div class="field"><label>nro</label><input id="destNro" value="93"/></div></div>
+          <div class="row3"><div class="field"><label>Bairro</label><input id="destBairro" value="Vila Nova Conceição"/></div><div class="field"><label>cMun</label><input id="destCMun" value="3550308"/></div><div class="field"><label>xMun</label><input id="destMun" value="São Paulo"/></div></div>
+          <div class="row4"><div class="field"><label>UF</label><input id="destUf" value="SP"/></div><div class="field"><label>CEP</label><input id="destCep" value="04535080"/></div><div class="field"><label>Fone</label><input id="destFone" value=""/></div><div class="field"><label>IE</label><input id="destIe" value="136115388117"/></div></div>
+          <div class="field"><label>indIEDest</label><input id="destIndIEDest" value="1"/></div>
+          <h3>Transporte</h3>
+          <div class="row2"><div class="field"><label>modFrete</label><input id="transpModFrete" value="0"/></div><div class="field"><label>CNPJ Transp.</label><input id="transpCnpj" value="31565104031307"/></div></div>
+          <div class="row2"><div class="field"><label>Nome Transp.</label><input id="transpNome" value="Transportes Bresciane Ltda."/></div><div class="field"><label>IE Transp.</label><input id="transpIe" value="149528231111"/></div></div>
+          <div class="row2"><div class="field"><label>Endereço Transp.</label><input id="transpEnd" value="Avenida Coronel Sezefredo Fag 15641"/></div><div class="field"><label>Município</label><input id="transpMun" value="Sao Paulo"/></div></div>
+          <div class="field"><label>UF Transp.</label><input id="transpUf" value="SP"/></div>
+          <h4>Volumes</h4>
+          <div class="row4"><div class="field"><label>qVol</label><input id="volQvol" value="3510"/></div><div class="field"><label>Espécie</label><input id="volEsp" value="PACOTE"/></div><div class="field"><label>Peso Líq.</label><input id="volPesoL" value="7637.760"/></div><div class="field"><label>Peso Bruto</label><input id="volPesoB" value="8037.900"/></div></div>
+          <h3>Cobrança / Fatura</h3>
+          <div class="row3"><div class="field"><label>nFat</label><input id="fatNum" value="00145438"/></div><div class="field"><label>vOrig</label><input id="fatVOrig" value="103989.35"/></div><div class="field"><label>vDesc</label><input id="fatVDesc" value="0.00"/></div></div>
+          <div class="field"><label>vLiq</label><input id="fatVLiq" value="103989.35"/></div>
+          <h4>Duplicata</h4>
+          <div class="row3"><div class="field"><label>nDup</label><input id="dupNum" value="001"/></div><div class="field"><label>Vencimento</label><input id="dupVenc" type="date"/></div><div class="field"><label>vDup</label><input id="dupVal" value="103989.35"/></div></div>
+          <h3>Pagamento</h3>
+          <div class="row2"><div class="field"><label>tPag</label><input id="pagTipo" value="15"/></div><div class="field"><label>vPag</label><input id="pagVal" value="103989.35"/></div></div>
+        </div>
+      </div>
+
+      <div id="subtab-inv-trib" class="sub-content" style="display:none">
+        <div class="panel">
+          <h3>ICMS (por item)</h3>
+          <div class="row4"><div class="field"><label>orig</label><input id="icmsOrig" value="2"/></div><div class="field"><label>CST</label><input id="icmsCst" value="10"/></div><div class="field"><label>modBC</label><input id="icmsModBC" value="3"/></div><div class="field"><label>pICMS</label><input id="icmsPicms" value="4.0000"/></div></div>
+          <div class="row4"><div class="field"><label>modBCST</label><input id="icmsModBCST" value="4"/></div><div class="field"><label>pMVAST</label><input id="icmsPmvast" value="65.5400"/></div><div class="field"><label>pRedBCST</label><input id="icmsPredBCST" value="0.0000"/></div><div class="field"><label>pICMSST</label><input id="icmsPicmsST" value="18.0000"/></div></div>
+          <div class="row2"><div class="field"><label>pFCPST</label><input id="icmsPfcpST" value="2.0000"/></div><div class="field"><label>NCM</label><input id="icmsNcm" value="18063210"/></div></div>
+          <div class="row2"><div class="field"><label>CEST</label><input id="icmsCest" value="1700300"/></div><div class="field"><label>indEscala</label><input id="icmsIndEscala" value="S"/></div></div>
+          <h3>IPI</h3>
+          <div class="row2"><div class="field"><label>cEnq</label><input id="ipiCenq" value="999"/></div><div class="field"><label>CST IPI</label><input id="ipiCst" value="53"/></div></div>
+          <h3>PIS</h3>
+          <div class="row3"><div class="field"><label>CST PIS</label><input id="pisCst" value="01"/></div><div class="field"><label>pPIS</label><input id="pisPpis" value="1.6500"/></div><div class="field"><label>vPIS</label><input id="pisVpis" value="0.17" readonly/></div></div>
+          <h3>COFINS</h3>
+          <div class="row3"><div class="field"><label>CST COFINS</label><input id="cofinsCst" value="01"/></div><div class="field"><label>pCOFINS</label><input id="cofinsPcofins" value="7.6000"/></div><div class="field"><label>vCOFINS</label><input id="cofinsVcofins" value="0.76" readonly/></div></div>
+          <h3>Totais ICMSTot</h3>
+          <div class="row4"><div class="field"><label>vBC</label><input id="bcIcms" value="93958.61"/></div><div class="field"><label>vICMS</label><input id="vlrIcms" value="0.00"/></div><div class="field"><label>vBCST</label><input id="bcIcmsSt" value="118497.60"/></div><div class="field"><label>vST</label><input id="vlrIcmsSt" value="4907.80"/></div></div>
+          <div class="row4"><div class="field"><label>vFCPST</label><input id="vlrFcp" value="2369.95"/></div><div class="field"><label>vIPI</label><input id="vlrIpi" value="8.00"/></div><div class="field"><label>vFrete</label><input id="vlrFrete" value="0.00"/></div><div class="field"><label>vSeg</label><input id="vlrSeg" value="2.00"/></div></div>
+          <div class="row2"><div class="field"><label>vDesc</label><input id="vlrDesc" value="0.00"/></div><div class="field"><label>vOutro</label><input id="vlrOutras" value="0.00"/></div></div>
+          <h3>Dados Adicionais</h3>
+          <div class="field"><label>infAdFisco</label><textarea id="infAdFisco">VFCPST=2.369,95|</textarea></div>
+          <div class="field"><label>Observações (infCpl)</label><textarea id="obsNf" rows="4">Heishop No 77678876 ; OBS. PO null BASE ICMS ST: - 904721RE 118.497,60 4.907,80.</textarea></div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- ═══ TRANSFER ORDER VIEW ═══ -->
+    <div id="view-to" style="display:none">
+      <div id="to-step1" class="po-step">
+        <div class="step-header">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">Selecionar CD / HUB Origem</div>
+            <div class="step-sub">Centro de distribuição que enviará os produtos</div>
+          </div>
+        </div>
+        <div class="hub-search-row">
+          <div class="search-wrap" style="max-width:380px">
+            <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <input id="to-cd-search" class="search-input" placeholder="Buscar CD/HUB origem…" oninput="toRenderCDList()"/>
+          </div>
+        </div>
+        <div class="hub-grid" id="to-cd-grid">
+          <div class="po-loading"><span class="spinner"></span> Carregando…</div>
+        </div>
+      </div>
+
+      <div id="to-step2" class="po-step" style="display:none">
+        <div class="breadcrumb">
+          <button class="bc-btn" onclick="toBack1()">← Origem</button>
+          <span class="bc-sep">/</span>
+          <span id="to-bc-cd" class="bc-current"></span>
+        </div>
+        <div class="step-header">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">Selecionar HUB Destino</div>
+            <div class="step-sub">Hub que receberá os produtos transferidos</div>
+          </div>
+        </div>
+        <div class="hub-grid" id="to-hub-grid"></div>
+      </div>
+
+      <div id="to-step3" class="po-step" style="display:none">
+        <div class="breadcrumb">
+          <button class="bc-btn" onclick="toBack1()">← Origem</button>
+          <span class="bc-sep">/</span>
+          <button class="bc-btn" onclick="toBack2()" id="to-bc-cd-btn"></button>
+          <span class="bc-sep">/</span>
+          <span id="to-bc-hub" class="bc-current"></span>
+          <div class="bc-actions">
+            <button class="btn-ghost" onclick="toFetchProducts()">↻ Recarregar produtos</button>
+            <button class="btn-success" id="btn-create-to" onclick="toCreate()" disabled>⬆ Criar Transfer Order</button>
+          </div>
+        </div>
+        <div class="ctx-bar">
+          <div class="ctx-pill"><span class="ctx-lbl">Origem (CD)</span><span class="ctx-val" id="to-ctx-cd">—</span></div>
+          <span class="ctx-sep">→</span>
+          <div class="ctx-pill"><span class="ctx-lbl">Destino (HUB)</span><span class="ctx-val" id="to-ctx-hub">—</span></div>
+          <span class="ctx-sep">·</span>
+          <div class="ctx-pill"><span class="ctx-lbl">Produtos em comum</span><span class="ctx-val accent" id="to-prod-count">…</span></div>
+        </div>
+        <div class="api-status-wrap" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span id="to-last-result" style="font-size:12px;color:var(--green)"></span>
+        </div>
+
+        <div class="po-toolbar" style="margin-top:12px">
+          <div class="search-wrap" style="flex:1;min-width:180px">
+            <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <input id="to-prod-search" class="search-input" placeholder="Buscar produto, SKU ou barcode…" oninput="toFilter()"/>
+          </div>
+          <div class="uom-group" id="to-temp-group"><span style="font-size:11px;color:var(--text3);white-space:nowrap">Temp:</span>
+            <label class="uom-chip"><input type="checkbox" value="Room Temperature" onchange="toOnTempChange()"> Room</label>
+            <label class="uom-chip"><input type="checkbox" value="Chilled" onchange="toOnTempChange()"> Chilled</label>
+            <label class="uom-chip"><input type="checkbox" value="Refrigerated" onchange="toOnTempChange()"> Refrigerated</label>
+            <label class="uom-chip"><input type="checkbox" value="Frozen" onchange="toOnTempChange()"> Frozen</label>
+          </div>
+          <button class="btn-ghost" onclick="toToggleAll(false)">Limpar sel.</button>
+        </div>
+
+        <div class="po-table-wrap">
+          <table class="po-table">
+            <thead><tr>
+              <th class="th-chk">
+                <label class="chk-wrap">
+                  <input type="checkbox" id="to-chk-all" onchange="toToggleAll(this.checked)"/>
+                  <span class="chk-box"></span>
+                </label>
+              </th>
+              <th style="min-width:180px">Produto</th>
+              <th>SKU</th>
+              <th>Barcode</th>
+              <th>Temperatura</th>
+              <th class="th-qty">Quantidade</th>
+            </tr></thead>
+            <tbody id="to-body">
+              <tr><td colspan="6" class="po-loading"><span class="spinner"></span> Selecione origem e destino…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="po-footer">
+          <div class="po-footer-l">
+            <span id="to-count-lbl">0 produtos</span>
+            <span class="sep">·</span>
+            <span id="to-sel-lbl" class="muted">Nenhum selecionado</span>
+          </div>
+          <div class="po-footer-r">
+            <span class="muted">Total quantidade</span>
+            <span class="po-total-val" id="to-total-qty">0 un</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CONFIG VIEW ═══ -->
+    <div id="view-config" style="display:none">
+      <div class="sub-tabs-bar" id="config-tabs-bar">
+        <button class="sub-tab active" onclick="setConfigTab('cfg-hubs')">Hubs</button>
+        <button class="sub-tab" onclick="setConfigTab('cfg-vendors')">Vendors</button>
+      </div>
+
+      <div id="subtab-cfg-hubs" class="sub-content">
+        <div class="mgmt-header">
+          <div class="mgmt-title">Hubs de Distribuição</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-add" onclick="openHubModal()">+ Novo Hub</button>
+          </div>
+        </div>
+        <div id="hubs-list" class="mgmt-list"></div>
+      </div>
+
+      <div id="subtab-cfg-vendors" class="sub-content" style="display:none">
+        <div class="mgmt-header">
+          <div class="mgmt-title">Vendor Products</div>
+          <button class="btn-add" onclick="openVendorModal()">+ Novo Vendor</button>
+        </div>
+        <div id="vendors-list" class="mgmt-list"></div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+<!-- ═══════ TESTS VIEW ═══════ -->
+<div id="view-tests" style="display:none">
+  <div class="top-tabs" id="tests-tabs-bar">
+    <button class="top-tab active" data-tab="raio" onclick="testsSetTab('raio')">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      RAIO
+    </button>
+  </div>
+  <div class="wrap">
+    <div id="tests-view-raio">
+      <div class="sub-tabs-bar" id="tests-subtabs-bar">
+        <button class="sub-tab active" data-subtab="raio-app" onclick="testsSetSubTab('raio-app')">RAIO APP</button>
+      </div>
+
+      <div id="tests-subtab-raio-app">
+        <div class="tests-grid">
+          <div class="test-card" id="test-card-raio_regressivo"></div>
+          <div class="test-card" id="test-card-raio_smoke"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ ROPS VIEW ═══════ -->
+<div id="view-rops" style="display:none">
+  <div class="top-tabs" id="rops-tabs-bar">
+    <button class="top-tab active" onclick="setRopsTab('delivery')">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Criar Delivery
+    </button>
+    <button class="top-tab" onclick="setRopsTab('reservaki')">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M8 1v6M4 4l4 3 4-3M2 8h12v5a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Reservaki
+    </button>
+  </div>
+
+  <!-- ═══ DELIVERY TAB ═══ -->
+  <div id="rops-tab-delivery" class="wrap">
+
+    <!-- TOP BAR: Actions + Status Card -->
+    <div class="rops-top-bar">
+      <button class="btn-ghost" onclick="ropsNewData()" style="padding:10px 18px;font-size:13px;font-weight:600">
+        🔄 Novo Dados
+      </button>
+      <button class="btn-success" id="btn-rops-create" onclick="ropsRequestCreate()" style="padding:10px 24px;font-size:13px;font-weight:700">
+        🚀 Criar Delivery
+      </button>
+    </div>
+    <div id="rops-status-card" style="display:none;margin-bottom:16px"></div>
+
+    <div class="rops-layout">
+
+      <!-- LEFT: Delivery Config -->
+      <div class="rops-main">
+        <!-- Cenários Rápidos -->
+        <div id="rops-scenarios" class="panel" style="margin-bottom:16px"></div>
+
+        <div class="panel" style="margin-bottom:16px">
+          <h3 style="margin-top:0">Configuração da Delivery</h3>
+          <div class="row2">
+            <div class="field">
+              <label>External Hub ID</label>
+              <input id="rops-hub-id" value="SAO002" placeholder="ex: SAO002, SAO903"/>
+            </div>
+            <div class="field">
+              <label>Gorjeta (tip)</label>
+              <input id="rops-tip" type="number" value="15" min="0" placeholder="0"/>
+            </div>
+          </div>
+
+          <h3>Cliente</h3>
+          <div class="row2">
+            <div class="field">
+              <label>Nome do Cliente</label>
+              <input id="rops-customer-name" placeholder="Nome completo"/>
+            </div>
+            <div class="field">
+              <label>Telefone</label>
+              <input id="rops-customer-phone" placeholder="+5521999999999"/>
+            </div>
+          </div>
+
+          <h3>Tempo de Entrega (ETA)</h3>
+          <div class="row2">
+            <div class="field">
+              <label>Confirmado em (confirmed_at)</label>
+              <input id="rops-confirmed-at" type="datetime-local"/>
+            </div>
+            <div class="field">
+              <label>Estimativa para (estimated_to)</label>
+              <input id="rops-estimated-to" type="datetime-local"/>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>ETA Mínimo</label>
+              <input id="rops-eta-min" type="datetime-local"/>
+            </div>
+            <div class="field">
+              <label>ETA Máximo</label>
+              <input id="rops-eta-max" type="datetime-local"/>
+            </div>
+          </div>
+
+          <h3>Observações &amp; Código</h3>
+          <div class="field">
+            <label>Nota para o entregador (note)</label>
+            <textarea id="rops-note" rows="2" placeholder="Ex: Ligar quando chegar na portaria…">Olá Tudo Bem? Poderia me ligar quando chegar na portaria do predio e não da grau por favor</textarea>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:10px">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--text2)">
+              <input type="checkbox" id="rops-delivery-code-toggle" onchange="ropsToggleDeliveryCode()" style="width:auto"/>
+              Código de entrega
+            </label>
+            <div id="rops-delivery-code-wrap" style="display:none">
+              <input id="rops-delivery-code" type="text" maxlength="4" placeholder="0000"
+                style="width:100px;text-align:center;font-family:var(--font-mono);font-size:22px;font-weight:700;padding:8px 14px;border:2px solid var(--accent);border-radius:8px;background:var(--bg3);color:var(--accent);letter-spacing:6px"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line Items -->
+        <div class="panel" style="margin-bottom:16px">
+          <div class="items-header" style="margin-bottom:10px">
+            <h3 style="margin:0;border:none;padding:0">Produtos (Line Items)</h3>
+            <div class="items-summary">
+              <span class="summary-pill"><span class="pill-lbl">Itens</span><span class="pill-val" id="rops-items-count">0</span></span>
+              <button class="btn-accent" onclick="ropsOpenProductPicker()">📦 Buscar no Hub</button>
+              <button class="btn-ghost" onclick="ropsAddLineItem()" style="font-size:11px">+ Manual</button>
+            </div>
+          </div>
+          <div class="po-table-wrap">
+            <table class="po-table" style="min-width:920px">
+              <thead><tr>
+                <th style="width:32px">#</th>
+                <th>SKU</th>
+                <th style="min-width:180px">Produto</th>
+                <th>Descrição</th>
+                <th>Barcode</th>
+                <th>Location</th>
+                <th>SF ID</th>
+                <th class="th-qty">QTD</th>
+                <th style="width:32px"></th>
+              </tr></thead>
+              <tbody id="rops-items-area"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Endereços -->
+      <div class="rops-sidebar">
+        <div class="panel">
+          <div class="mgmt-header" style="margin-bottom:12px">
+            <div class="mgmt-title">📍 Endereços de Entrega</div>
+            <button class="btn-add" onclick="ropsOpenAddrModal()" style="font-size:11px;padding:5px 10px">+ Novo Endereço</button>
+          </div>
+          <div id="rops-addr-list" class="rops-addr-list"></div>
+          <div class="field" style="margin-top:12px">
+            <label>Endereço formatado (override)</label>
+            <input id="rops-formatted-addr" placeholder="Selecione um endereço ou digite"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RESERVAKI TAB ═══ -->
+  <div id="rops-tab-reservaki" class="wrap" style="display:none">
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="btn-ghost" onclick="rsvReset()" style="padding:8px 16px;font-size:12px;font-weight:600">🔄 Limpar Tudo</button>
+    </div>
+
+    <!-- STEP 1: TURNOS -->
+    <div class="panel" style="margin-bottom:16px">
+      <div class="rsv-step-header">
+        <span class="rsv-step-num">1</span>
+        <div><div class="rsv-step-title">Criar Turnos (Shifts)</div>
+        <div class="rsv-step-sub">Informe o horário de início e a duração. Cada turno seguinte começa 1min após o anterior.</div></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Quantidade de turnos</label><input id="rsv-shift-qty" type="number" min="1" max="50" value="3"/></div>
+        <div class="field"><label>Nome do turno</label><input id="rsv-shift-name" value="Turno" placeholder="ex: Turno, Manhã, T"/></div>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Horário de início</label><input id="rsv-shift-start" type="time" value="07:00"/></div>
+        <div class="field"><label>Duração de cada turno (min)</label><input id="rsv-shift-duration" type="number" min="5" max="480" value="30"/></div>
+        <div class="field"><label>Email do criador</label><input id="rsv-email" value="automations@soudaki.com"/></div>
+      </div>
+      <button class="btn-accent" onclick="rsvCreateShifts()" id="btn-rsv-shifts" style="margin-top:8px">📋 Criar Turnos</button>
+      <div id="rsv-shifts-result" style="display:none;margin-top:10px"></div>
+    </div>
+
+    <!-- STEP 2: VAGAS (SLOTS) -->
+    <div class="panel" style="margin-bottom:16px">
+      <div class="rsv-step-header">
+        <span class="rsv-step-num">2</span>
+        <div><div class="rsv-step-title">Criar Vagas (Slots)</div>
+        <div class="rsv-step-sub">Selecione o hub, os turnos existentes, e configure a quantidade de vagas.</div></div>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Hub</label><input id="rsv-slot-hub" value="SAO022" placeholder="ex: SAO022"/></div>
+        <div class="field"><label>Quantidade de Dias</label><input id="rsv-slot-days" type="number" min="1" max="30" value="2"/></div>
+        <div class="field"><label>Vagas por turno/dia</label><input id="rsv-slot-qty" type="number" min="1" max="5000" value="50"/></div>
+      </div>
+      <div class="field">
+        <label>Turnos disponíveis
+          <button class="btn-ghost" onclick="rsvLoadShifts()" style="font-size:10px;padding:2px 8px;margin-left:8px">↻ Carregar da API</button>
+          <button class="btn-ghost" onclick="rsvSelectAll('slot')" style="font-size:10px;padding:2px 8px;margin-left:4px">Selecionar todos</button>
+        </label>
+        <div id="rsv-shift-list" style="margin-top:6px">
+          <span class="spinner-sm"></span> <span style="font-size:11px;color:var(--text2)">Carregando turnos…</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <button class="btn-accent" onclick="rsvCreateSlots()" id="btn-rsv-slots">📦 Gerar e Enviar Vagas</button>
+        <button class="btn-ghost" onclick="rsvDownloadCSV('slot')" id="btn-rsv-dl-slot" style="display:none;font-size:11px;padding:4px 10px">⬇ Baixar CSV</button>
+      </div>
+      <div id="rsv-slots-result" style="display:none;margin-top:10px"></div>
+    </div>
+
+    <!-- STEP 3: DIVULGAÇÃO -->
+    <div class="panel" style="margin-bottom:16px">
+      <div class="rsv-step-header">
+        <span class="rsv-step-num">3</span>
+        <div><div class="rsv-step-title">Divulgar Vagas</div>
+        <div class="rsv-step-sub">Usa os mesmos dados dos slots + segmentação de medalha e modal.</div></div>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Hub</label><input id="rsv-div-hub" value="SAO022" placeholder="ex: SAO022"/></div>
+        <div class="field"><label>Quantidade de Dias</label><input id="rsv-div-days" type="number" min="1" max="30" value="2"/></div>
+        <div class="field"><label>Vagas por turno/dia</label><input id="rsv-div-qty" type="number" min="1" max="5000" value="50"/></div>
+      </div>
+      <div class="field">
+        <label>Turnos
+          <button class="btn-ghost" onclick="rsvLoadShiftsDiv()" style="font-size:10px;padding:2px 8px;margin-left:8px">↻ Carregar da API</button>
+          <button class="btn-ghost" onclick="rsvSelectAll('div')" style="font-size:10px;padding:2px 8px;margin-left:4px">Selecionar todos</button>
+        </label>
+        <div id="rsv-div-shift-list" style="margin-top:6px">
+          <span class="spinner-sm"></span> <span style="font-size:11px;color:var(--text2)">Carregando turnos…</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Modal</label>
+        <div style="display:flex;gap:6px;margin-top:4px" id="rsv-modal-group">
+          <label class="uom-chip active"><input type="checkbox" value="Moto" checked onchange="this.parentElement.classList.toggle('active',this.checked)"/> 🏍️ Moto</label>
+          <label class="uom-chip active"><input type="checkbox" value="Bike" checked onchange="this.parentElement.classList.toggle('active',this.checked)"/> 🚲 Bike</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Medalhas</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px" id="rsv-medal-group">
+          <label class="uom-chip active"><input type="checkbox" value="Diamante" checked onchange="this.parentElement.classList.toggle('active',this.checked)"/> 💎 Diamante</label>
+          <label class="uom-chip active"><input type="checkbox" value="Ouro" checked onchange="this.parentElement.classList.toggle('active',this.checked)"/> 🥇 Ouro</label>
+          <label class="uom-chip active"><input type="checkbox" value="Prata" checked onchange="this.parentElement.classList.toggle('active',this.checked)"/> 🥈 Prata</label>
+          <label class="uom-chip active"><input type="checkbox" value="Bronze" checked onchange="this.parentElement.classList.toggle('active',this.checked)"/> 🥉 Bronze</label>
+          <label class="uom-chip active"><input type="checkbox" value="Novo" checked onchange="this.parentElement.classList.toggle('active',this.checked)"/> 🆕 Novo</label>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <button class="btn-accent" onclick="rsvCreateDivulgation()" id="btn-rsv-div">📢 Gerar e Divulgar</button>
+        <button class="btn-ghost" onclick="rsvDownloadCSV('div')" id="btn-rsv-dl-div" style="display:none;font-size:11px;padding:4px 10px">⬇ Baixar CSV</button>
+      </div>
+      <div id="rsv-div-result" style="display:none;margin-top:10px"></div>
+    </div>
+
+    <!-- Log -->
+    <div class="panel" id="rsv-log-panel" style="display:none">
+      <h3 style="margin-top:0">📊 Log de Execução</h3>
+      <div id="rsv-log" class="rsv-log"></div>
+    </div>
+  </div>
+</div>
+
+<div id="view-hubr" style="display:none"></div>
+<div id="view-wms" style="display:none"></div>
+
+<!-- ═══════ ESTOQUE VIEW ═══════ -->
+<div id="view-estoque" style="display:none">
+  <div class="wrap">
+    <div class="panel" style="margin-bottom:16px">
+      <h3 style="margin-top:0">📦 Gestão de Estoque</h3>
+
+      <div class="row2" style="margin-bottom:16px">
+        <div class="field"><label>Hub ID</label><input id="hubr-est-hub" value="SAO022"/></div>
+        <div class="field"><label>Shopper Code</label><input id="hubr-est-shopper" value="212121212121"/></div>
+      </div>
+
+      <!-- Consultar -->
+      <div class="rsv-step" style="padding-top:0">
+        <div class="rsv-step-title">Consultar Inventário</div>
+        <div class="rsv-step-sub">Busca produtos e quantidades por location.</div>
+        <div class="row2" style="margin-top:8px">
+          <div class="field"><label>SKU (opcional)</label><input id="hubr-est-sku" placeholder="ex: 530001"/></div>
+          <div class="field"><label>Limite</label><input id="hubr-est-limit" type="number" value="20"/></div>
+        </div>
+        <button class="btn-accent" onclick="hubrListInventory()" style="margin-top:4px">📦 Buscar</button>
+        <div id="hubr-inv-result" style="margin-top:8px"></div>
+      </div>
+
+      <!-- Processos -->
+      <div class="rsv-step">
+        <div class="rsv-step-title">Executar Processo</div>
+        <div class="rsv-step-sub">Inventory Move, Adjustment, Cycle Count, Waste</div>
+        <div class="row2" style="margin-top:8px">
+          <div class="field">
+            <label>Tipo</label>
+            <select id="hubr-process-kind" onchange="document.getElementById('hubr-cycle-extra').style.display=this.value==='cycle_count'?'':'none'">
+              <option value="inventory_adjustment">Inventory Adjustment</option>
+              <option value="cycle_count">Cycle Count</option>
+              <option value="inventory_move">Inventory Move</option>
+              <option value="waste">Waste</option>
+              <option value="move_between_product_kind">Move Between Product Kind</option>
+            </select>
+          </div>
+          <div class="field"><label>Warehouse Product ID</label><input id="hubr-process-wpid" placeholder="Copie da tabela acima"/></div>
+        </div>
+        <div class="row3">
+          <div class="field"><label>Quantidade</label><input id="hubr-process-qty" type="number" value="10"/></div>
+          <div class="field"><label>Location</label><input id="hubr-process-location" value="A-1-1-1"/></div>
+          <div class="field" id="hubr-cycle-extra" style="display:none">
+            <label>Before / After Total</label>
+            <div style="display:flex;gap:6px"><input id="hubr-before-total" type="number" value="0" style="width:60px"/><input id="hubr-after-total" type="number" value="10" style="width:60px"/></div>
+          </div>
+        </div>
+        <button class="btn-accent" onclick="hubrProcessTask()" style="margin-top:4px">⚙️ Executar</button>
+        <div id="hubr-process-result" style="margin-top:8px"></div>
+      </div>
+
+      <!-- Validar Invoice -->
+      <div class="rsv-step">
+        <div class="rsv-step-title">Validar Invoice</div>
+        <div class="rsv-step-sub">Verifica chave de acesso NF-e no warehouse.</div>
+        <div class="field" style="margin-top:8px"><label>Chave de Acesso (44 dígitos)</label><input id="hubr-invoice-key" placeholder="35240112345678..." style="font-family:var(--font-mono);font-size:11px"/></div>
+        <button class="btn-accent" onclick="hubrValidateInvoice()" style="margin-top:4px">🔍 Validar</button>
+        <div id="hubr-validate-result" style="margin-top:8px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="modal-confirm" class="modal-bg" style="display:none"><div class="modal"><div class="modal-title" id="mc-title">Confirmar</div><div class="modal-body" id="mc-body"></div><div class="modal-actions"><button class="btn-m-cancel" onclick="closeConfirm()">Cancelar</button><button class="btn-m-danger" id="mc-ok">Confirmar</button></div></div></div>
+<div id="modal-hub" class="modal-bg" style="display:none"><div class="modal"><div class="modal-title" id="hub-modal-title">Novo Hub</div><div class="field"><label>Nome</label><input id="hub-f-name" placeholder="ex: SAO903"/></div><div class="row2"><div class="field"><label>Cidade</label><input id="hub-f-city" placeholder="São Paulo"/></div><div class="field"><label>UF</label><input id="hub-f-uf" placeholder="SP" maxlength="2"/></div></div><div class="field" style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" id="hub-f-active" checked style="width:auto"/><label for="hub-f-active" style="margin:0;cursor:pointer">Ativo</label></div><div class="modal-actions"><button class="btn-m-cancel" onclick="closeHubModal()">Cancelar</button><button class="btn-m-ok" onclick="saveHubModal()">Salvar</button></div></div></div>
+<div id="modal-vendor" class="modal-bg" style="display:none"><div class="modal"><div class="modal-title" id="vendor-modal-title">Novo Vendor</div><div class="field"><label>Nome</label><input id="ven-f-name" placeholder="ex: BRF SP"/></div><div class="field"><label>CNPJ</label><input id="ven-f-cnpj" placeholder="01838723009850" maxlength="14"/></div><div class="field"><label>SF Account ID <span style="color:var(--green);font-size:10px">(obrigatório p/ PO)</span></label><input id="ven-f-sfid" placeholder="ex: 0015g000003xABCAAM" style="font-family:var(--font-mono);font-size:12px"/></div><div class="field" style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" id="ven-f-active" checked style="width:auto"/><label for="ven-f-active" style="margin:0;cursor:pointer">Ativo</label></div><div class="modal-actions"><button class="btn-m-cancel" onclick="closeVendorModal()">Cancelar</button><button class="btn-m-ok" onclick="saveVendorModal()">Salvar</button></div></div></div>
+
+<div id="modal-rops-addr" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-title" id="rops-addr-modal-title">Novo Endereço</div>
+    <div class="field"><label>Apelido / Label</label><input id="rops-addr-f-label" placeholder="ex: Casa do João, Escritório…"/></div>
+    <div class="field"><label>Endereço formatado</label><input id="rops-addr-f-formatted" placeholder="Av. Saquarema, 39"/></div>
+    <div class="row2">
+      <div class="field"><label>Rua (street)</label><input id="rops-addr-f-street" placeholder="Saquarema"/></div>
+      <div class="field"><label>Número</label><input id="rops-addr-f-number" placeholder="39"/></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Complemento</label><input id="rops-addr-f-complement" placeholder="Bloco B, Apt 204"/></div>
+      <div class="field"><label>Bairro</label><input id="rops-addr-f-neighborhood" placeholder="Centro"/></div>
+    </div>
+    <div class="field"><label>Cidade</label><input id="rops-addr-f-city" placeholder="Rio de Janeiro"/></div>
+    <div class="row2">
+      <div class="field"><label>Latitude</label><input id="rops-addr-f-lat" type="number" step="any" placeholder="-22.9233865"/></div>
+      <div class="field"><label>Longitude</label><input id="rops-addr-f-lng" type="number" step="any" placeholder="-42.4830489"/></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-m-cancel" onclick="ropsCloseAddrModal()">Cancelar</button>
+      <button class="btn-m-ok" onclick="ropsSaveAddrModal()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-rops-scenario" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:540px;max-height:85vh;overflow-y:auto">
+    <div class="modal-title" id="rops-sc-modal-title">Salvar Cenário</div>
+    <div class="field"><label>Nome do cenário</label><input id="rops-sc-f-name" placeholder="ex: Teste delivery RJ01 sem cliente"/></div>
+    <div class="field"><label>Descrição (opcional)</label><input id="rops-sc-f-desc" placeholder="Breve descrição do cenário"/></div>
+    <div class="row2">
+      <div class="field"><label>Ícone (emoji)</label><input id="rops-sc-f-icon" value="📋" style="width:60px;text-align:center;font-size:18px"/></div>
+      <div class="field"><label>Cor</label><input id="rops-sc-f-color" type="color" value="#3b82f6" style="height:36px;padding:2px"/></div>
+    </div>
+
+    <h3>Configuração dos campos</h3>
+    <div style="font-size:10px;color:var(--text3);margin-bottom:10px">
+      🎲 Aleatório = gera novo a cada execução · 📌 Fixo = usa o valor atual · ∅ Vazio = envia vazio
+    </div>
+
+    <div class="sc-field-row">
+      <span class="sc-field-label">Nome do Cliente</span>
+      <div class="sc-field-opts" id="rops-sc-opt-name">
+        <label class="sc-opt"><input type="radio" name="sc-opt-name" value="random" checked/> 🎲 Aleatório</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-name" value="fixed"/> 📌 Fixo</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-name" value="empty"/> ∅ Vazio</label>
+      </div>
+    </div>
+    <div class="sc-field-row">
+      <span class="sc-field-label">Telefone</span>
+      <div class="sc-field-opts" id="rops-sc-opt-phone">
+        <label class="sc-opt"><input type="radio" name="sc-opt-phone" value="random" checked/> 🎲 Aleatório</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-phone" value="fixed"/> 📌 Fixo</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-phone" value="empty"/> ∅ Vazio</label>
+      </div>
+    </div>
+    <div class="sc-field-row">
+      <span class="sc-field-label">Gorjeta</span>
+      <div class="sc-field-opts" id="rops-sc-opt-tip">
+        <label class="sc-opt"><input type="radio" name="sc-opt-tip" value="random" checked/> 🎲 Aleatório</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-tip" value="fixed"/> 📌 Fixo</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-tip" value="empty"/> ∅ Zero</label>
+      </div>
+    </div>
+    <div class="sc-field-row">
+      <span class="sc-field-label">Nota</span>
+      <div class="sc-field-opts" id="rops-sc-opt-note">
+        <label class="sc-opt"><input type="radio" name="sc-opt-note" value="fixed" checked/> 📌 Fixo</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-note" value="empty"/> ∅ Vazio</label>
+      </div>
+    </div>
+    <div class="sc-field-row">
+      <span class="sc-field-label">Produtos</span>
+      <div class="sc-field-opts" id="rops-sc-opt-products">
+        <label class="sc-opt"><input type="radio" name="sc-opt-products" value="current" checked/> 📌 Lista atual</label>
+        <label class="sc-opt"><input type="radio" name="sc-opt-products" value="auto"/> 🎲 Auto do Hub</label>
+      </div>
+      <div id="rops-sc-auto-count-wrap" style="display:none;margin-top:4px">
+        <label style="font-size:10px;color:var(--text3)">Qtd produtos automáticos</label>
+        <input id="rops-sc-auto-count" type="number" min="1" max="20" value="1" style="width:60px;padding:4px 8px;font-size:12px;border:1px solid var(--border);border-radius:5px;background:var(--bg3);color:var(--text)"/>
+      </div>
+    </div>
+
+    <h3>Execução</h3>
+    <div class="row2">
+      <div class="field">
+        <label>Repetir (multi-delivery)</label>
+        <input id="rops-sc-f-repeat" type="number" min="1" max="50" value="1" placeholder="1"/>
+      </div>
+      <div class="field">
+        <label>Pós-ação</label>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2);cursor:pointer">
+            <input type="checkbox" id="rops-sc-f-autopick" style="width:auto"/> Auto Pick
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-m-cancel" onclick="scenarioCloseModal()">Cancelar</button>
+      <button class="btn-m-ok" onclick="scenarioSaveModal()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-rops-products" class="modal-bg" style="display:none">
+  <div class="modal" style="max-width:720px;max-height:85vh;display:flex;flex-direction:column">
+    <div class="modal-title">📦 Produtos do Hub — <span id="rops-picker-hub"></span></div>
+    <div style="margin-bottom:10px">
+      <div class="search-wrap">
+        <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input id="rops-picker-search" class="search-input" placeholder="Buscar por nome ou SKU…" oninput="ropsFilterPicker()"/>
+      </div>
+    </div>
+    <div style="flex:1;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius)">
+      <table class="po-table" style="min-width:500px">
+        <thead style="position:sticky;top:0;z-index:1"><tr>
+          <th class="th-chk" style="width:36px">
+            <label class="chk-wrap">
+              <input type="checkbox" id="rops-picker-chk-all" onchange="ropsPickerToggleAll(this.checked)"/>
+              <span class="chk-box"></span>
+            </label>
+          </th>
+          <th>SKU</th>
+          <th style="min-width:200px">Produto</th>
+          <th>Barcode</th>
+          <th>Location</th>
+        </tr></thead>
+        <tbody id="rops-picker-body">
+          <tr><td colspan="5" class="po-loading"><span class="spinner"></span> Carregando…</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+      <span id="rops-picker-count" style="font-size:12px;color:var(--text3)">0 selecionados</span>
+      <div class="modal-actions" style="margin:0">
+        <button class="btn-m-cancel" onclick="ropsCloseProductPicker()">Cancelar</button>
+        <button class="btn-m-ok" onclick="ropsConfirmProductPicker()">Adicionar selecionados</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="danfeWrapper" style="position:fixed;left:-9999px;top:0;background:#fff;width:820px;"><div id="danfePreview" class="danfe"></div></div>
+
+<!-- Modules (ordem importa: dependências primeiro) -->
+<script src="/lib/modules/helpers.js"></script>
+
+<!-- Database -->
+<script src="/lib/db.js"></script>
+<script src="/lib/modules/keyboard-shortcuts.js"></script>
+<script src="/lib/modules/ui-effects.js"></script>
+<script src="/lib/modules/state.js"></script>
+<script src="/lib/modules/nf-key.js"></script>
+<script src="/lib/modules/nf-items.js"></script>
+<script src="/lib/modules/danfe.js"></script>
+<script src="/lib/modules/hub.js"></script>
+<script src="/lib/modules/vendor.js"></script>
+<script src="/lib/modules/products.js"></script>
+<script src="/lib/modules/po-table.js"></script>
+<script src="/lib/modules/transfer-order.js"></script>
+<script src="/lib/modules/rops.js"></script>
+<script src="/lib/modules/rops-scenarios.js"></script>
+<script src="/lib/modules/reservaki.js"></script>
+
+<script src="/lib/modules/hubr.js"></script>
+<script src="/lib/modules/wms.js"></script>
+<script src="/lib/modules/tests.js"></script>
+<script src="/lib/modules/tabs.js"></script>
+
+<!-- Orchestrator & Navigation -->
+<script src="/lib/app.js"></script>
+<script src="/lib/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* ============================================================
+   apps/management-test/client/styles/base.css
+   Reset, body, tipografia e utilitários globais.
+   ============================================================ */
+
+@import './tokens.css';
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Utilitários ── */
+.mono  { font-family: var(--font-mono); }
+.muted { color: var(--text3); }
+.sep   { color: var(--border2); }
+.hidden { display: none !important; }

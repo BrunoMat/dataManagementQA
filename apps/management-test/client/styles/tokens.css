@@ -1,0 +1,14 @@
+/* ============================================================
+   apps/management-test/client/styles/tokens.css
+   Importa os tokens compartilhados do ui-kit e adiciona
+   overrides específicos do app Management Test.
+   ============================================================ */
+
+/* Tokens base do monorepo */
+@import '../../../../packages/ui-kit/tokens.css';
+
+/* Overrides / extensões management-test-specific */
+:root {
+  --mt-header-height: 52px;
+  --mt-nav-height:    40px;
+}

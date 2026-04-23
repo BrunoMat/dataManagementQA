@@ -1,0 +1,6 @@
+{
+  "name": "@jokr/db",
+  "version": "1.0.0",
+  "description": "Shared IndexedDB wrapper for Jokr frontend apps",
+  "main": "index.js"
+}

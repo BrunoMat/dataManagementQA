@@ -1,0 +1,19 @@
+{
+  "name": "jokr-platform",
+  "version": "1.0.0",
+  "description": "Monorepo Jokr — plataforma de sistemas internos",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "mt":       "npm start  --workspace=apps/management-test",
+    "mt:dev":   "npm run dev --workspace=apps/management-test",
+    "mt:3001":  "PORT=3001 npm start --workspace=apps/management-test",
+    "install:all": "npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

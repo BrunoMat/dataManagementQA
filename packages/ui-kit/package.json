@@ -1,0 +1,6 @@
+{
+  "name": "@jokr/ui-kit",
+  "version": "1.0.0",
+  "description": "Shared design tokens and base CSS for Jokr apps",
+  "main": "tokens.css"
+}

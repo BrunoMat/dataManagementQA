@@ -1,0 +1,94 @@
+/* ============================================================
+   apps/management-test/client/styles/layout.css
+   Header, navegação principal, sub-tabs, wrap geral.
+   ============================================================ */
+
+/* ── HEADER ── */
+header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--mt-header-height);
+}
+.header-inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 16px;
+}
+.header-brand { display: flex; align-items: center; gap: 10px; }
+.header-icon  { font-size: 20px; }
+header h1 { font-size: 15px; font-weight: 600; line-height: 1; }
+header p  { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* ── EXPORT BAR ── */
+.export-bar { display: flex; gap: 6px; }
+.exp-btn { font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 6px; border: 1px solid transparent; cursor: pointer; transition: all .15s; }
+.exp-btn.xml   { background: #064e3b; color: #6ee7b7; border-color: #065f46; }
+.exp-btn.xml:hover   { background: #065f46; }
+.exp-btn.img   { background: #1e1b4b; color: #a5b4fc; border-color: #312e81; }
+.exp-btn.img:hover   { background: #312e81; }
+.exp-btn.print { background: var(--bg3); color: var(--text2); border-color: var(--border2); }
+.exp-btn.print:hover { background: var(--border); }
+
+/* ── MAIN NAV ── */
+.main-nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky;
+  top: var(--mt-header-height);
+  z-index: 190;
+  height: var(--mt-nav-height);
+}
+.main-nav-inner { max-width: 1500px; margin: 0 auto; display: flex; height: 100%; }
+.main-tab {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 0 18px; border: none; background: transparent;
+  color: var(--text2); font-size: 12px; font-weight: 500;
+  cursor: pointer; border-bottom: 2px solid transparent;
+  transition: all .15s; font-family: inherit; height: 100%;
+}
+.main-tab svg { width: 14px; height: 14px; }
+.main-tab:hover { color: var(--text); }
+.main-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.main-badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; line-height: 1.4; }
+.main-badge.green { background: var(--green); color: #000; }
+
+/* ── WRAP ── */
+.wrap { max-width: 1500px; margin: 0 auto; padding: 20px 24px; }
+
+/* ── SUB TABS ── */
+.sub-tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+.sub-tab {
+  font-size: 12px; font-weight: 500; padding: 7px 16px 9px;
+  border: none; background: transparent; color: var(--text2);
+  cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: all .15s; font-family: inherit;
+}
+.sub-tab:hover { color: var(--text); }
+.sub-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── INNER TABS ── */
+.inner-tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
+.inner-tab {
+  font-size: 11px; font-weight: 500; padding: 6px 14px 8px;
+  border: none; background: transparent; color: var(--text2);
+  cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: all .15s; font-family: inherit;
+}
+.inner-tab:hover { color: var(--text); }
+.inner-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .wrap { padding: 12px; }
+  header { padding: 0 12px; }
+  .main-nav { padding: 0 12px; }
+}

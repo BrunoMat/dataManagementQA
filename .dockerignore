@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+.env
+.git
+.DS_Store
+apps/management-test/client/node_modules
+apps/management-test/server/node_modules
+dist
+build

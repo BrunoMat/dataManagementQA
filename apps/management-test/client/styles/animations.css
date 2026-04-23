@@ -1,0 +1,528 @@
+/* ============================================================
+   animations.css — Animações e Microinterações
+   ============================================================ */
+
+/* ══════════════════════════════════════════════════════════
+   1. KEYFRAMES - Animações base
+   ══════════════════════════════════════════════════════════ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fadeInDown {
+  from { 
+    opacity: 0; 
+    transform: translateY(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes slideInLeft {
+  from { 
+    opacity: 0; 
+    transform: translateX(-30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.9); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. UTILITY CLASSES - Aplicar animações
+   ══════════════════════════════════════════════════════════ */
+
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+.animate-fade-in-up { animation: fadeInUp 0.4s ease-out; }
+.animate-fade-in-down { animation: fadeInDown 0.4s ease-out; }
+.animate-slide-in-right { animation: slideInRight 0.4s ease-out; }
+.animate-slide-in-left { animation: slideInLeft 0.4s ease-out; }
+.animate-scale-in { animation: scaleIn 0.3s ease-out; }
+.animate-bounce { animation: bounce 0.6s ease-in-out; }
+.animate-shake { animation: shake 0.5s ease-in-out; }
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.animate-spin { animation: spin 1s linear infinite; }
+
+/* ══════════════════════════════════════════════════════════
+   3. TRANSITIONS - Suavizações
+   ══════════════════════════════════════════════════════════ */
+
+.transition-all {
+  transition: all 0.2s ease;
+}
+
+.transition-fast {
+  transition: all 0.15s ease;
+}
+
+.transition-slow {
+  transition: all 0.4s ease;
+}
+
+.transition-colors {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.transition-transform {
+  transition: transform 0.2s ease;
+}
+
+/* ══════════════════════════════════════════════════════════
+   4. HOVER EFFECTS - Microinterações em botões e cards
+   ══════════════════════════════════════════════════════════ */
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hover-glow {
+  transition: box-shadow 0.2s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-brightness {
+  transition: filter 0.2s ease;
+}
+
+.hover-brightness:hover {
+  filter: brightness(1.1);
+}
+
+/* ══════════════════════════════════════════════════════════
+   5. RIPPLE EFFECT - Click feedback
+   ══════════════════════════════════════════════════════════ */
+
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════
+   6. LOADING STATES - Skeletons e spinners
+   ══════════════════════════════════════════════════════════ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg3) 0%,
+    var(--bg4) 50%,
+    var(--bg3) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  height: 14px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 60%;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.skeleton-button {
+  height: 36px;
+  width: 120px;
+  border-radius: 8px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--bg4);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.spinner-large {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   7. TOAST ANIMATIONS - Notificações
+   ══════════════════════════════════════════════════════════ */
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.toast.show {
+  animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast.hide {
+  animation: toastSlideOut 0.3s ease-out;
+}
+
+/* ══════════════════════════════════════════════════════════
+   8. MODAL ANIMATIONS
+   ══════════════════════════════════════════════════════════ */
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal {
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  animation: modalSlideDown 0.3s ease-out;
+}
+
+/* ══════════════════════════════════════════════════════════
+   9. PAGE TRANSITIONS
+   ══════════════════════════════════════════════════════════ */
+
+.view-transition-enter {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.view-transition-exit {
+  animation: fadeInDown 0.3s ease-out reverse;
+}
+
+/* ══════════════════════════════════════════════════════════
+   10. HOME GRID - Stagger animation
+   ══════════════════════════════════════════════════════════ */
+
+.home-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.home-card {
+  animation: fadeInUp 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.home-card:nth-child(1) { animation-delay: 0.05s; }
+.home-card:nth-child(2) { animation-delay: 0.10s; }
+.home-card:nth-child(3) { animation-delay: 0.15s; }
+.home-card:nth-child(4) { animation-delay: 0.20s; }
+.home-card:nth-child(5) { animation-delay: 0.25s; }
+
+/* ══════════════════════════════════════════════════════════
+   11. BUTTON STATES - Active/Focus
+   ══════════════════════════════════════════════════════════ */
+
+button, .btn {
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:active:not(:disabled),
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   12. INPUT FOCUS EFFECTS
+   ══════════════════════════════════════════════════════════ */
+
+input, textarea, select {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
+}
+
+/* ══════════════════════════════════════════════════════════
+   13. CONFETTI - Celebration effect
+   ══════════════════════════════════════════════════════════ */
+
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  top: -10px;
+  opacity: 0;
+  animation: confetti 3s ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.confetti-piece:nth-child(odd) { background: #ff6b6b; }
+.confetti-piece:nth-child(even) { background: #4ecdc4; }
+.confetti-piece:nth-child(3n) { background: #ffe66d; }
+.confetti-piece:nth-child(4n) { background: #a8e6cf; }
+
+/* ══════════════════════════════════════════════════════════
+   14. KEYBOARD SHORTCUTS UI
+   ══════════════════════════════════════════════════════════ */
+
+.kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 2px 0 var(--border);
+  margin: 0 2px;
+}
+
+.ctrl-hint {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.ctrl-hint.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.shortcut-row:last-child {
+  border-bottom: none;
+}
+
+.shortcut-keys {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  min-width: 140px;
+}
+
+.shortcut-desc {
+  flex: 1;
+  color: var(--text2);
+  font-size: 13px;
+}
+
+.modal-shortcuts-content {
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.shortcuts-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════════════════════════════════
+   15. PROGRESS BAR ANIMATION
+   ══════════════════════════════════════════════════════════ */
+
+.progress-bar {
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.indeterminate {
+  width: 30%;
+  animation: progress-indeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-indeterminate {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(350%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   16. SMOOTH SCROLLING
+   ══════════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ══════════════════════════════════════════════════════════
+   17. REDUCED MOTION - Acessibilidade
+   ══════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

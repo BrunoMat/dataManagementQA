@@ -1,0 +1,10 @@
+{
+  "name": "@jokr/salesforce",
+  "version": "1.0.0",
+  "description": "Shared Salesforce OAuth2 client for Jokr apps",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "qs":    "^6.11.2"
+  }
+}
