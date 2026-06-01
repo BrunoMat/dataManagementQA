@@ -1,11 +1,11 @@
-# Jokr Platform — Monorepo
+# Data Management Platform
 
-Plataforma interna de ferramentas operacionais da Jokr.
+Plataforma de gestão de teste
 
 ## Estrutura
 
 ```
-jokr/
+dataManagement/
 ├── apps/
 │   └── management-test/             # Data Management QA Testing — Geração de teste + Purchase Order
 │       ├── client/              # Frontend (HTML/CSS/JS)
@@ -43,11 +43,11 @@ cp .env.example .env
 Edite o `.env`:
 
 ```env
-SF_BASE_URL=https://jokr6--jokrpart.sandbox.my.salesforce.com
+SF_BASE_URL=
 SF_API_VERSION=v56.0
-SF_CLIENT_ID=seu_client_id
-SF_CLIENT_SECRET=seu_client_secret
-SF_BUYER_ID=005Ox000006DT7BIAW
+SF_CLIENT_ID=
+SF_CLIENT_SECRET=
+SF_BUYER_ID=
 PORT=3000
 
 # ROPS — Rider Operations
@@ -96,7 +96,7 @@ lsof -i :3000
 
 ## Problema: SF_BASE_URL não definida
 
-O `.env` precisa estar na **raiz do monorepo** (`jokr/.env`), não dentro de `apps/management-test/`.
+O `.env` precisa estar na **raiz do monorepo** (`/.env`), não dentro de `apps/management-test/`.
 O servidor busca automaticamente em `../../..` relativo a `server/index.js`.
 
 ## Rotas da API
